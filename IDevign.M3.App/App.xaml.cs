@@ -8,6 +8,8 @@ using IDevign.M3.Candy;
 
 namespace IDevign.M3.App
 {
+    using System.Threading;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -19,7 +21,7 @@ namespace IDevign.M3.App
             manager.Connect<DialogView, DialogViewModel>();
             manager.Connect<MainView, MainViewModel>();
 
-            var mainViewModel = new MainViewModel(manager);
+            var mainViewModel = new MainViewModel(manager) { Dispatcher = Application.Current.Dispatcher };
             manager.ShowViewFor(mainViewModel);
         }
     }

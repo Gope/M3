@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 
 namespace IDevign.M3.Candy
 {
+    using System.Reflection;
+
     public class ViewModelBase : INotifyPropertyChanged
     {
         public virtual void OnLoad()
@@ -23,14 +25,22 @@ namespace IDevign.M3.Candy
 
         protected virtual void OnPropertyChanged(Expression<Func<object>> expression)
         {
-            var name = expression.Body.ToString();
-            OnPropertyChanged(name);
+            OnPropertyChanged(GetPropertyName(expression));
         }
-
+        
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private static string GetPropertyName<TProp>(Expression<Func<TProp>> propertySelector)
+        {
+            var memberExpr = propertySelector.Body as MemberExpression;
+
+            if (memberExpr == null) throw new ArgumentException("must be a member accessor", "propertySelector");
+
+            return memberExpr.Member.Name;
         }
 
         #endregion

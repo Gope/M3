@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using IDevign.M3.Candy;
+using System.Windows.Threading;
 
 namespace IDevign.M3.App
 {
@@ -30,6 +31,8 @@ namespace IDevign.M3.App
 
         #region Properties for Binding 
 
+        public Dispatcher Dispatcher { get; set; }
+
         public string WindowTitle
         {
             get { return _WindowTitle; }
@@ -42,7 +45,10 @@ namespace IDevign.M3.App
 
         public string DependendOnControlValue
         {
-            get { return _DependendOnControlValue; }
+            get
+            {
+                return _DependendOnControlValue;
+            }
             set
             {
                 _DependendOnControlValue = value;
