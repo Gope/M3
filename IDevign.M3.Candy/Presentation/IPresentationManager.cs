@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace IDevign.M3.Candy
+namespace IDevign.M3.Candy.Presentation
 {
     /// <summary>
     /// Contract for registering Views and their ViewModels and present them. In real world applications you would use an 

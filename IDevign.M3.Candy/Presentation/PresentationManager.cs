@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 
-namespace IDevign.M3.Candy
+namespace IDevign.M3.Candy.Presentation
 {
     /// <summary>
     /// Registers Views and their ViewModels and presents them. In real world applications you would use an 
@@ -21,7 +19,7 @@ namespace IDevign.M3.Candy
         /// <typeparam name="TViewModel">The type of the view model belonging to this view.</typeparam>
         public void Register<TFrameworkElement, TViewModel>() where TFrameworkElement : FrameworkElement, new() where TViewModel : ViewModelBase, new()
         {
-            viewLookUp.Add(typeof(TViewModel), typeof(TFrameworkElement));
+            this.viewLookUp.Add(typeof(TViewModel), typeof(TFrameworkElement));
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace IDevign.M3.Candy
         /// <typeparam name="TViewModel">The type of the view model to show a view for.</typeparam>
         public void ShowViewFor<TViewModel>() where TViewModel : ViewModelBase, new()
         {
-            ShowViewFor(new TViewModel());
+            this.ShowViewFor(new TViewModel());
         }
 
         /// <summary>
@@ -43,7 +41,7 @@ namespace IDevign.M3.Candy
         public void ShowViewFor<TViewModel>(TViewModel viewModel) where TViewModel : ViewModelBase, new()
         {
             Type type;
-            if (!viewLookUp.TryGetValue(typeof (TViewModel), out type))
+            if (!this.viewLookUp.TryGetValue(typeof (TViewModel), out type))
             {
                 throw new InvalidOperationException("No view registered for ViewModel of type " + typeof(TViewModel).Name);
             }

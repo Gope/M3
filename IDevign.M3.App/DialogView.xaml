@@ -4,6 +4,6 @@
         Title="DialogView" Height="300" Width="300">
     <StackPanel>
         <TextBlock Text="{Binding Path=SomeNiceValue, TargetNullValue='Nothing happened yet...'}" />
-        <Button Command="{Binding NotifyAllSiblingsCommand }" />
+        <Button Content="Open a few Dialog Windows and Click" Command="{Binding NotifyAllSiblingsCommand }" />
     </StackPanel>
 </Window>

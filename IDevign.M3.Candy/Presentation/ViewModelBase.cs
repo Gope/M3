@@ -3,13 +3,30 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
-namespace IDevign.M3.Candy
+using IDevign.M3.Candy.EventAggregator;
+
+namespace IDevign.M3.Candy.Presentation
 {
     /// <summary>
     /// Base class for viewmodels implementing <see cref="INotifyPropertyChanged"/> and basic eventhandling.
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        #region Constructor 
+
+        public ViewModelBase()
+        {
+            // Designer Support
+        }
+
+        public ViewModelBase(IPresentationManager presentationManager, IEventAggregator eventAggregator)
+        {
+            EventAggregator = eventAggregator;
+            PresentationManager = presentationManager;
+        }
+
+        #endregion
+
         #region Handling of View events
 
         public virtual void OnLoad()
@@ -30,12 +47,12 @@ namespace IDevign.M3.Candy
 
         protected virtual void OnPropertyChanged(Expression<Func<object>> expression)
         {
-            OnPropertyChanged(GetPropertyName(expression));
+            this.OnPropertyChanged(GetPropertyName(expression));
         }
         
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -47,6 +64,14 @@ namespace IDevign.M3.Candy
 
             return memberExpr.Member.Name;
         }
+
+        #endregion
+
+        #region Infrastructure Properties
+
+        public IEventAggregator EventAggregator { get; protected set; }
+
+        public IPresentationManager PresentationManager { get; protected set; }
 
         #endregion
     }

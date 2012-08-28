@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 
-namespace IDevign.M3.Candy
+namespace IDevign.M3.Candy.Misc
 {
     public class DelegateCommand : ICommand
     {
@@ -18,30 +18,30 @@ namespace IDevign.M3.Candy
         public DelegateCommand(Action<object> execute,
                        Predicate<object> canExecute)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            if (_canExecute == null)
+            if (this._canExecute == null)
             {
                 return true;
             }
 
-            return _canExecute(parameter);
+            return this._canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            this._execute(parameter);
         }
 
         public void RaiseCanExecuteChanged()
         {
-            if (CanExecuteChanged != null)
+            if (this.CanExecuteChanged != null)
             {
-                CanExecuteChanged(this, EventArgs.Empty);
+                this.CanExecuteChanged(this, EventArgs.Empty);
             }
         }
     }
