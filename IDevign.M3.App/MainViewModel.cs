@@ -31,8 +31,6 @@ namespace IDevign.M3.App
 
         #region Properties for Binding 
 
-        public Dispatcher Dispatcher { get; set; }
-
         public string WindowTitle
         {
             get { return _WindowTitle; }
@@ -64,7 +62,12 @@ namespace IDevign.M3.App
         {
             get
             {
-                return new DelegateCommand((obj) => _PresentationManager.ShowViewFor(new DialogViewModel(_PresentationManager)));
+                return new DelegateCommand(obj =>
+                    {
+                        var vm = new DialogViewModel();
+                        vm.Closed += (sender, args) => DependendOnControlValue = "Dialog was closed!";
+                        _PresentationManager.ShowViewFor(vm);
+                    });
             }
         }
 
@@ -72,7 +75,7 @@ namespace IDevign.M3.App
         {
             get
             {
-                return new DelegateCommand((obj) => { DependendOnControlValue = "Value changed!"; });
+                return new DelegateCommand(obj => { DependendOnControlValue = "You just hovered over this control!"; });
             }
         }
 

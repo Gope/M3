@@ -1,21 +1,45 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using IDevign.M3.Candy;
 
 namespace IDevign.M3.App
 {
     public class DialogViewModel : ViewModelBase
     {
-        private readonly IPresentationManager _PresentationManager;
+        private string _SomeNiceValue;
 
-        public DialogViewModel()
+        #region Lifecycle events 
+
+        public event EventHandler Closed = delegate { };
+
+        protected virtual void OnClosed()
         {
+            Closed(this, EventArgs.Empty);
         }
 
-        public DialogViewModel(IPresentationManager presentationManager)
+        public override void OnClose()
         {
-            _PresentationManager = presentationManager;
+            base.OnClose();
+            OnClosed();
         }
 
-        
+        #endregion
+
+        public string SomeNiceValue
+        {
+            get { return _SomeNiceValue; }
+            set { _SomeNiceValue = value;
+            JNoti}
+        }
+
+        #region Commands 
+
+        public ICommand NotifyAllSiblingsCommand
+        {
+            get { return new DelegateCommand(obj => { /* EA Stuff here */ }); }
+        }
+
+        #endregion
+
     }
 }

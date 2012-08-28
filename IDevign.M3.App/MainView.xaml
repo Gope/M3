@@ -1,7 +1,6 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:AppControls="clr-namespace:IDevign.M3.AppControls;assembly=IDevign.M3.AppControls" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         x:Class="IDevign.M3.App.MainView"
         Title="{Binding WindowTitle}" Height="350" Width="525"
@@ -10,16 +9,16 @@
         xmlns:DataGridSample="clr-namespace:IDevign.M3.App" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=DataGridSample:MainViewModel, IsDesignTimeCreatable=True}">
     <StackPanel>
-        <AppControls:CoolControl HorizontalAlignment="Left" x:Name="coolControl1" VerticalAlignment="Top" Margin="5">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window, AncestorLevel=1}, Path=DataContext.ReactToSomethingCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </AppControls:CoolControl>
-        
+        <!-- Default Command triggering -->
         <Button Command="{Binding OpenDialogCommand }" Content="Button" HorizontalAlignment="Left" x:Name="button1" VerticalAlignment="Top" Margin="5" />
         
-        <TextBlock x:Name="textBlock1" Text="{Binding DependendOnControlValue}" Margin="5" />
+        <!-- Blend Interaction Trigger for executing ICommands from any event possible -->
+        <TextBlock x:Name="textBlock1" Text="{Binding DependendOnControlValue}" Margin="5">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <i:InvokeCommandAction Command="{Binding ReactToSomethingCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBlock>
     </StackPanel>
 </Window>

@@ -8,24 +8,15 @@ namespace IDevign.M3.AppControls
     {
         public string CoolValue
         {
-            get { return "This value is so cool!"; }
+            get { return "How to use Controls and MVVM is just in the making."; }
         }
 
-        public ICommand ReactToSomethingCommand
+        public ICommand DoSomethingCommand
         {
             get
             {
                 return new DelegateCommand((obj) => { });
             }
         }
-
-        //public static readonly RoutedEvent TapEvent = EventManager.RegisterRoutedEvent("MouseEnter", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CoolControl));
-
-        //// Provide CLR accessors for the event 
-        //public event RoutedEventHandler Tap
-        //{
-        //    add { AddHandler(TapEvent, value); }
-        //    remove { RemoveHandler(TapEvent, value); }
-        //}
     }
 }

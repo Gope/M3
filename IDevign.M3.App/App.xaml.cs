@@ -17,11 +17,12 @@ namespace IDevign.M3.App
     {
         public App()
         {
-            PresentationManager manager = new PresentationManager();
-            manager.Connect<DialogView, DialogViewModel>();
-            manager.Connect<MainView, MainViewModel>();
+            // Push the knowledge about connecting and instantiating view and viewmodel to a 3rd party/component.
+            IPresentationManager manager = new PresentationManager();
+            manager.Register<DialogView, DialogViewModel>();
+            manager.Register<MainView, MainViewModel>();
 
-            var mainViewModel = new MainViewModel(manager) { Dispatcher = Application.Current.Dispatcher };
+            var mainViewModel = new MainViewModel(manager);
             manager.ShowViewFor(mainViewModel);
         }
     }

@@ -5,10 +5,13 @@ using System.Linq.Expressions;
 
 namespace IDevign.M3.Candy
 {
-    using System.Reflection;
-
+    /// <summary>
+    /// Base class for viewmodels implementing <see cref="INotifyPropertyChanged"/> and basic eventhandling.
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        #region Handling of View events
+
         public virtual void OnLoad()
         {
             Debug.WriteLine(string.Format("Loaded {0}", this.GetType().Name));
@@ -18,6 +21,8 @@ namespace IDevign.M3.Candy
         {
             Debug.WriteLine(string.Format("Unloaded {0}", this.GetType().Name));
         }
+
+        #endregion
 
         #region NotifyPropertyChanged Implementation 
 
